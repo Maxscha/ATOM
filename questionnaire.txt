@@ -1,0 +1,4002 @@
+Commit Msg Generation Evaluation
+
+Explanation: Compared generated messages with ground truth and generated messages are shuffled. Score 0 means there is no similarity between two messages and score 4 means two messages are identical.
+
+========
+
+what are you currently engaged in?
+Software Developer
+Software Maintenance
+Undergraduate student
+Master
+PHD
+others
+
+========
+
+How long have you  used Java for software development
+less than one moth
+one month - six months
+less than one year
+one year - three year
+more than three years
+
+========
+
+Raw Diff:
+
+@@ -268,7 +268,7 @@ public abstract class AbstractOutputBuffer implements OutputBuffer{         
+
+lastActiveFilter = -1;       
+
+ committed = false;       
+
+ finished = false;
+
+-
+
++        byteCount = 0;   
+
+ }
+
+ 
+
+Reference Message:
+
+fix http issue apache org bugzilla show bug cgi id NUMBER
+
+Generated Message 1:
+
+sparc use the equivalent constructor to NUMBER
+
+Generated Message 2:
+
+align socketoutputbuffer implementation
+
+Generated Message 3:
+
+fix http issue apache org bugzilla show bug cgi id NUMBER
+
+Commit_id: 1e855885778ea1ff5f50527becd322c43e5edcf6
+
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+========
+Raw Diff:
+
+@@ -538,7 +538,7 @@ public class ScorePhrasesLearnFeatWt extends PhraseScorer             for (Class cl : otherIgnoreClasses.keySet()) {             
+
+ if ((Boolean) l.get(cl)) {                 
+
+ignoreclass = true;
+
+-                candidate = longestMatching.get("OTHERSEM");
+
++                candidate = longestMatching.containsKey("OTHERSEM")? longestMatching.get("OTHERSEM") : candidate;               
+
+ break;               
+
+}             
+
+}
+
+Reference Message:
+
+fix minor stuff
+
+Generated Message 1:
+
+fix minor edge bug
+
+Generated Message 2:
+
+ignore write file in integration sample test
+
+Generated Message 3:
+
+fix minor bug
+
+Commit_id: 1e855885778ea1ff5f50527becd322c43e5edcf6
+
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+========
+Raw Diff:
+
+@@ -154,8 +154,8 @@ public class DomainDaoImpl extends GenericDaoBase implements Dom        
+
+ DomainVO domain = findById(id);       
+
+ if (domain == null) {
+
+-            s_logger.error("Unable to remove domain as domain " + id + " no longer exists");
+
+-            return false;
+
++            s_logger.info("Unable to remove domain as domain " + id + " no longer exists");
+
++            return true;       
+
+ }          
+
+f (domain.getParent() == null) {
+
+Reference Message:
+
+cloudstack NUMBER automation deletion of domain with cleanup set to true fails
+
+Generated Message 1:
+
+cloudstack NUMBER delete snapshot base on cleanup and delete other domain set to true
+
+Generated Message 2:
+
+cloudstack NUMBER automation deletion of domain with cleanup set to true fails
+
+Generated Message 3:
+
+cloudstack NUMBER automation deletion of domain with cleanup set to true fails
+
+Commit_id: c7e8a631a7a7b2581c86a1ec33820525392f7a33
+
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+========
+Raw Diff:
+
+@@ -228,7 +228,7 @@ public class UploadMonitorImpl implements UploadMonitor {
+
+ _uploadDao.persist(uploadTemplateObj);
+
+ try{
+
+// Create Symlink at ssvm
+
+-            String uuid = UUID.randomUUID().toString() + ".vhd";
+
++            String uuid = UUID.randomUUID().toString() + "." + template.getFormat().toString().toLowerCase();
+
+CreateEntityDownloadURLCommand cmd = new CreateEntityDownloadURLCommand(storageServers.get(0).getParent(), vmTemplateHost.getInstallPath(), uuid);
+
+long result = send(use_ssvm.getId(), cmd, null);
+
+ if (result == -1){
+
+Reference Message:
+
+bug NUMBER generarting the right url for correspond hypervisors for extract template
+
+Generated Message 1:
+
+bug NUMBER generarting the right url for correspond hypervisors for extract template
+
+Generated Message 2:
+
+bug NUMBER generarting the right url for correspond hypervisors for extract template
+
+Generated Message 3:
+
+bug NUMBER generarting the right url when generate a template
+
+Commit_id: 7677a2bfee35f42e7a4f1d61c51da05e0fea83cb
+
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+========
+Raw Diff:
+
+@@ -40,7 +40,7 @@ public class HeartbeatServices {      
+
+public HeartbeatServices(long heartbeatInterval, long heartbeatTimeout) {         
+
+Preconditions.checkArgument(0L < heartbeatInterval, "The heartbeat interval must be larger than 0.");
+
+-        Preconditions.checkArgument(heartbeatInterval <= heartbeatTimeout, "The heartbeat timeout should be larger or equal than the heartbeat timeout.");
+
++        Preconditions.checkArgument(heartbeatInterval <= heartbeatTimeout, "The heartbeat timeout should be larger or equal than the heartbeat interval.");          
+
+this.heartbeatInterval = heartbeatInterval;         
+
+this.heartbeatTimeout = heartbeatTimeout;
+
+Reference Message:
+
+flink NUMBER runtime fix wrong check message about heartbeat interval for FILE
+
+Generated Message 1:
+
+simplify checkpoint cleanup by NUMBER NUMBER
+
+Generated Message 2:
+
+flink NUMBER fix check of heartbeattimeoutintervalms in heartbeatmonitor
+
+Generated Message 3:
+
+flink NUMBER fix check of heartbeattimeoutintervalms in heartbeatmonitor
+
+Commit_id: e5f826cdd8cdc24ba61d6cf3acf8e3572b03df16
+
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+========
+Raw Diff:
+
+@@ -61,7 +61,7 @@ public class MulticastParallelMiddleTimeoutTest extends ContextTestSupport {                  from("direct:a").setBody(constant("A")); 
+
+-                from("direct:b").delay(3000).setBody(constant("B"));
+
++                from("direct:b").delay(4000).setBody(constant("B"));                  
+
+from("direct:c").delay(500).setBody(constant("C"));           
+
+ }
+
+Reference Message:
+
+fix test on ci server
+
+Generated Message 1:
+
+camel3 to fix a potential npe on camel jdbc should use a camel jdbc a a camel jdbc should fail a well
+
+Generated Message 2:
+
+try to fix the camel core test error on a slow box
+
+Generated Message 3:
+
+fix test that may fail on ci server
+
+Commit_id: d924b8d91076346aef4e311cc4a16dbac4c23d5a
+
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+========
+Raw Diff:
+
+@@ -66,7 +66,7 @@ public class SimpleRecoveryTests extends AbstractNodesTests {         
+
+startNode("server2");        
+
+ logger.info("Running Cluster Health");
+
+-        clusterHealth = client("server1").admin().cluster().health(clusterHealthRequest().waitForGreenStatus()).actionGet();
+
++        clusterHealth = client("server1").admin().cluster().health(clusterHealthRequest().waitForGreenStatus().waitForNodes("2")).actionGet();         
+
+logger.info("Done Cluster Health, status " + clusterHealth.status());         
+
+assertThat(clusterHealth.timedOut(), equalTo(false));         
+
+assertThat(clusterHealth.status(), equalTo(ClusterHealthStatus.GREEN));
+
+Reference Message:
+
+improve test to wait for NUMBER node
+
+Generated Message 1:
+
+improve test to wait for NUMBER status
+
+Generated Message 2:
+
+test wait unitl all machine join the cluster
+
+Generated Message 3:
+
+improve test to wait for NUMBER node
+
+Commit_id: f0f62ce00ca04c11f820b92439496d15a7fe019c
+
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+========
+Raw Diff:
+
+@@ -1564,7 +1564,7 @@ public class DefaultCamelContext extends ServiceSupport implements ModelCamelCon        
+
+ // setup default thread pool for error handler         
+
+if (errorHandlerExecutorService == null || errorHandlerExecutorService.isShutdown()) {
+
+-            errorHandlerExecutorService = getExecutorServiceManager().newDefaultScheduledThreadPool(this, "ErrorHandlerRedeliveryTask");
+
++            errorHandlerExecutorService = getExecutorServiceManager().newDefaultScheduledThreadPool("ErrorHandlerRedeliveryThreadPool", "ErrorHandlerRedeliveryTask");         }        
+
+ // start the route definitions before the routes is started
+
+ 
+
+Reference Message:
+
+well name in jmx for default error handler redelivery thread pool
+
+Generated Message 1:
+
+no need to acquire synchronize init instead of init for a reboot thread make it easy to hang
+
+Generated Message 2:
+
+polished
+
+Generated Message 3:
+
+redelivery error handler only need thread pool if redelivery be enabeled
+
+Commit_id: f2f6f95323ada07a0708224fba38fa1cf4c0b235
+
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+========
+Raw Diff:
+
+@@ -33,8 +33,8 @@ public class JpaComponentConfigurationAndDocumentationTest extends CamelTestSupp
+
+ @Test
+
+ public void testComponentConfiguration() throws Exception {
+
+JpaComponent comp = context.getComponent("jpa", JpaComponent.class);
+
+-        EndpointConfiguration conf = comp.createConfiguration("jpa://org.apache.camel.examples.SendEmail" +
+
+-                "?usePersist=true&persistenceUnit=custom");
+
++        EndpointConfiguration conf = comp.createConfiguration("jpa://org.apache.camel.examples.SendEmail"
+
++                + "?usePersist=true&persistenceUnit=custom");
+
+          assertEquals("true", conf.getParameter("usePersist"));         assertEquals("custom", conf.getParameter("persistenceUnit"));
+
+Reference Message:
+
+minor fix c error in camel jpa
+
+Generated Message 1:
+
+fix test failure
+
+Generated Message 2:
+
+do not override the content type header of cxf response
+
+Generated Message 3:
+
+minor fix c error in camel netty
+
+Commit_id: 50cacb9eabeae492207a6442d3841a5804d5ed37
+
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+========
+Raw Diff:
+
+@@ -217,7 +217,7 @@ public class ManagementContext implements Service {     }      
+
+public boolean isConnectorStarted() {
+
+-        return connectorServer.isActive();
+
++        return connectorServer != null && connectorServer.isActive();     }    
+
+ /**
+
+Reference Message:
+
+additional fix for http issue apache org activemq browse amq NUMBER jmx for slave broker
+
+Generated Message 1:
+
+possible possible npe
+
+Generated Message 2:
+
+return null when try to escape null value instead of return an empty string
+
+Generated Message 3:
+
+http issue apache org activemq browse amq NUMBER prevent broker deadlock if jmxconnector start hang
+
+Commit_id: bf91745bf509cf6277f934a4c8be05032cdf6e03
+
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+========
+Raw Diff:
+
+@@ -88,7 +88,7 @@ public final class Response {   
+
+ /**     
+
+* Committed flag.     
+
+*/
+
+-    protected boolean commited = false;
+
++    protected volatile boolean commited = false;     
+
+ /**
+
+Reference Message:
+
+fix http bz apache org bugzilla show bug cgi id NUMBER
+
+Generated Message 1:
+
+ddl debug value change
+
+Generated Message 2:
+
+read write by multiple thread outside sync need to be volatile
+
+Generated Message 3:
+
+fix http bz apache org bugzilla show bug cgi id NUMBER
+
+Commit_id: cda8313c2d8b487d377c31dc502857d2bbde1825
+
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+========
+Raw Diff:
+
+@@ -98,7 +98,7 @@ public class InstanceOfSnippets implements Snippets {       
+
+ for (int i = 0; i < hints.length; i++) {             
+
+KlassPointer hintHub = hints[i];             
+
+boolean positive = hintIsPositive[i];
+
+-            if (probability(NOT_FREQUENT_PROBABILITY, hintHub.equal(objectHub))) {
+
++            if (probability(LIKELY_PROBABILITY, hintHub.equal(objectHub))) {               
+
+ hintsHit.inc();               
+
+ return positive ? trueValue : falseValue;           
+
+ }
+
+Reference Message:
+
+fix branch probability in instanceof snippet
+
+Generated Message 1:
+
+probability stamp should always be use for float stamp reference
+
+Generated Message 2:
+
+fix FILE NUMBER
+
+Generated Message 3:
+
+adjust probability in monitor snippet
+
+Commit_id: e6f58dfc917e549e40eb8e90e4f238d844e61527
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -549,7 +549,7 @@ public abstract class BaseTestConsumer T, U extends BaseTestConsumer T, Uimpl
+
+ throw fail("More values received than expected (" + i + ")");
+
+ }
+
+if (expectedNext) {
+
+-            throw fail("Fever values received than expected (" + i + ")");
+
++            throw fail("Fewer values received than expected (" + i + ")");
+
+ }         
+
+return (U)this;     
+
+}
+
+Reference Message:
+
+NUMBER x fix typo in error message NUMBER
+
+Generated Message 1:
+
+put second second second
+
+Generated Message 2:
+
+add fail
+
+Generated Message 3:
+
+NUMBER x fix assertvaluesequence reverse error message NUMBER
+
+Commit_id: c799bc08ade4fb981a2a5b2ad983a0adf1445c23
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -139,7 +139,8 @@ public class GwtPreferences implements Preferences {    
+
+ @Override     
+
+public String getString (String key) {
+
+-        return (String)values.get(key);
+
++        String v = (String)values.get(key);
+
++        return v == null ? "" : v;     }      
+
+@Override
+
+Reference Message:
+
+fix issue NUMBER
+
+Generated Message 1:
+
+sort authorization value in FILE
+
+Generated Message 2:
+
+fix test failure due to classcastexception convert integer to string
+
+Generated Message 3:
+
+fix issue NUMBER
+
+Commit_id: 29847ed673205f1efb756d33bc0279a4d718cdd5
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -266,7 +266,7 @@ public class SnapshotSchedulerImpl implements SnapshotScheduler {                 tmpSnapshotScheduleVO.setAsyncJobId(jobId);               
+
+ _snapshotScheduleDao.update(snapshotScheId, tmpSnapshotScheduleVO);             
+
+} catch (Exception e) {
+
+-                s_logger.debug("Scheduling snapshot failed due to " + e.toString(), e);
+
++                s_logger.warn("Scheduling snapshot failed due to " + e.toString());           
+
+ } finally {               
+
+ if ( tmpSnapshotScheduleVO != null) {                   
+
+ _snapshotScheduleDao.releaseFromLockTable(snapshotScheId);
+
+Reference Message:
+
+change the wait time for camel test asyncprocess
+
+Generated Message 1:
+
+change the wait time for FILE java
+
+Generated Message 2:
+
+change the wait time for camel test asyncprocess
+
+Generated Message 3:
+
+change the wait time for camel test asyncprocess
+
+Commit_id: 421ad48ed97e34fb91cb9f71961c34a818628d03
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -650,7 +650,8 @@ public abstract class CitrixResourceBase implements ServerResource, HypervisorRe         
+
+Long newDynamicMemoryMin = vmSpec.getMinRam();         
+
+Long newDynamicMemoryMax = vmSpec.getMaxRam();         
+
+if (staticMemoryMin > newDynamicMemoryMin || newDynamicMemoryMax > staticMemoryMax) {
+
+-            throw new CloudRuntimeException("Cannot scale up the vm because of memory constraint violation: 0 <= memory-static-min <= memory-dynamic-min <= memory-dynamic-max <= memory-static-max "); +            throw new CloudRuntimeException("Cannot scale up the vm because of memory constraint violation: " + +                    "0 <= memory-static-min(" +staticMemoryMin+ ") <= memory-dynamic-min(" +newDynamicMemoryMin+ ") <= memory-dynamic-max(" +newDynamicMemoryMax+ ") <= memory-static-max(" +staticMemoryMax+ ")");          }          vm.setMemoryDynamicRange(conn, newDynamicMemoryMin, newDynamicMemoryMax); Reference Message: cloudstack NUMBER Generated Message 1: cloudstack NUMBER fix FILE proxy and private variable to share vms Generated Message 2: mention config property name when validate memory configuration Generated Message 3: cloudstack NUMBER
+
+Commit_id: bb6cd764c75f5b781be7a502b77542565909879f
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -40,7 +40,7 @@ class RegularImmutableMultiset extends ImmutableMultiset {     
+
+ new RegularImmutableMultiset(ImmutableList.of());    
+
+private final transient Multisets.ImmutableEntry[] entries;
+
+-  private final transient Multisets.ImmutableEntry[] hashTable;
+
++  @NullableDecl private final transient Multisets.ImmutableEntry[] hashTable; 
+
+ private final transient int size; 
+
+ private final transient int hashCode;
+
+Reference Message:
+
+add nullness annotation on the field in FILE java
+
+Generated Message 1:
+
+don t generate buildrules in FILE
+
+Generated Message 2:
+
+don t use generic superclass here
+
+Generated Message 3:
+
+add nullness annotation on the field in FILE java
+
+commit_id: 5c9ed4923b21863a317ed971ba51247e8c8feba9
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -25,7 +25,7 @@ import org.apache.activemq.command.Message;  * @version $Revision: 426366 $  */ 
+
+public abstract class AbstractDeadLetterStrategy implements DeadLetterStrategy {
+
+-    private boolean processNonPersistent = true;
+
++    private boolean processNonPersistent = false;     
+
+private boolean processExpired = true;      
+
+public boolean isSendToDeadLetterQueue(Message message) {
+
+Reference Message:
+
+fix for http issue apache org activemq browse amq NUMBER
+
+Generated Message 1:
+
+fix npe with java NUMBER
+
+Generated Message 2:
+
+fix for http issue apache org activemq browse amq NUMBER
+
+Generated Message 3:
+
+fix http issue apache org bugzilla show bug cgi id NUMBER
+
+Commit_id: c5e1eae2e36f86f9eb6f773c0628880543a1a261
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -87,7 +87,7 @@ public class URLCollection implements Iterable {         
+
+} catch (MalformedURLException mfue) {           
+
+ // No WARN message to avoid performance impact           
+
+ if(log.isDebugEnabled()) {
+
+-                log.debug("Error occurred building relative url for:"+url+", message:"+mfue.getMessage());
+
++                log.debug("Error occurred building relative url for: {}, message: {}", url, mfue.getMessage());             }           
+
+ // No point in adding the URL as String as it will result in null            
+
+ // returned during iteration, see URLString
+
+Reference Message:
+
+use format string in log message
+
+Generated Message 1:
+
+fix exception message
+
+Generated Message 2:
+
+correct parameter for log message expiresdate be null and not want here
+
+Generated Message 3:
+
+use parameter for log message
+
+Commit_id: b1a508a3c852555717f4ee51b5f59b414ad03526
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -89,6 +89,6 @@ class StompSocket extends TransportSupport implements WebSocket, StompTransport     }    
+
+ public void sendToStomp(StompFrame command) throws IOException {
+
+-        outbound.sendMessage(WebSocket.SENTINEL_FRAME, command.toString());
+
++        outbound.sendMessage(WebSocket.SENTINEL_FRAME, command.format());   
+
+ } 
+
+}
+
+Reference Message:
+
+http issue apache org jira browse amq NUMBER web socket and truncate body
+
+Generated Message 1:
+
+fix isdone in FILE
+
+Generated Message 2:
+
+include cl in getrangeslice debug log
+
+Generated Message 3:
+
+http issue apache org jira browse amq NUMBER
+
+Commit_id: 4c7525d89e44e7d25360eecf2f5c6037622044e6
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -237,7 +237,7 @@ public class LinkTag extends CompositeTag {           
+
+ Node node;           
+
+ int i = 0;             
+
+for (SimpleNodeIterator e = children(); e.hasMoreNodes();) {
+
+-                node = (Node) e.nextNode();
+
++                node = e.nextNode();               
+
+ sb.append("   " + (i++) + " ");                 
+
+sb.append(node.toString() + "\n");           
+
+ }
+
+Reference Message:
+
+remove unnecessary cast
+
+Generated Message 1:
+
+remove unnecessary cast
+
+Generated Message 2:
+
+gr NUMBER fix review comment
+
+Generated Message 3:
+
+remove unnecessary cast
+
+Commit_id: d028dea3bf28cf4b9db87443b99598ba3e6bf81e
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -59,7 +59,7 @@ public abstract class BaseReturnValues implements ReturnValues {     
+
+* @param clazz     
+
+* @return true if clazz is void (primitive class)     
+
+*/    
+
+-    protected boolean isVoid(Class returnType) {
+
+-        return returnType == Void.TYPE;
+
++    protected boolean isVoid(Class clazz) {
+
++        return clazz == Void.TYPE;   
+
+ }
+
+ }
+
+Reference Message:
+
+some refactoring to cover final class scenario
+
+Generated Message 1:
+
+fix test re order action generation
+
+Generated Message 2:
+
+early failure when return value from nodeclasstype isn t a class
+
+Generated Message 3:
+
+some refactoring to cover final class scenario
+
+commit_id: 449979f489faa299fcdf7f09e98c7bf9c5059597
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -123,7 +123,7 @@ public class OIndexManagerShared extends OIndexManagerAbstract implements OIndex
+
+ if (getDatabase().getTransaction().isActive())
+
+ throw new IllegalStateException("Cannot create a new index inside a transaction");
+
+-    final Character c = OSchemaShared.checkClassNameIfValid(iName);
+
++    final Character c = OSchemaShared.checkFieldNameIfValid(iName);
+
+ if (c != null)
+
+ throw new IllegalArgumentException("Invalid index name '" + iName + "'. Character '" + c + "' is invalid");
+
+Reference Message:
+
+fix issue NUMBER
+
+Generated Message 1:
+
+index http issue apache org jira browse amq NUMBER
+
+Generated Message 2:
+
+make field standard escape final
+
+Generated Message 3:
+
+fix issue NUMBER
+
+commit_id: 48267493ec26ca5350e01c134757ad402f016e5a
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -837,7 +837,7 @@ public abstract class Http2TestBase extends TomcatBaseTest {
+
+Assume.assumeTrue("This test is only expected to trigger an exception with NIO2",
+
+connector.getProtocolHandlerClassName().contains("Nio2"));
+
+-            Assume.assumeTrue("This test is only expected to trigger an exception on Windo9ws",
+
++            Assume.assumeTrue("This test is only expected to trigger an exception on Windows",
+
+ isWindows());
+
+ }   
+
+ }
+
+Reference Message:
+
+fix typo in message
+
+Generated Message 1:
+
+fix compilation error with non null driver
+
+Generated Message 2:
+
+enable not slow test case
+
+Generated Message 3:
+
+correct typo in the message
+
+Commit_id: 92330d7db021bb6dc0a8cd7ab5d9f2a42bffc406
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -114,8 +114,7 @@ public class ComplexIntegrationTest extends StreamingMultipleProgramsTestBase {
+
+//i == 18
+
+expected2 += "(20,(a,1))";
+
+-        //We create a separate environment for this test because of the slot-related to iteration issues.
+
+-        StreamExecutionEnvironment env = new TestStreamEnvironment(4, 32); //StreamExecutionEnvironment.getExecutionEnvironment();
+
++        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();         DataStream sourceStream1 = env.addSource(new TupleSource()).setParallelism(1);          
+
+IterativeDataStream it = sourceStream1.sum(0).setParallelism(1).filter(new FilterFunction
+
+Reference Message:
+
+flink NUMBER stream test for iteration be gracefully shut down
+
+Generated Message 1:
+
+flink NUMBER test fix FILE counter broken
+
+Generated Message 2:
+
+rename the env method parameter to suppress ecj lint
+
+Generated Message 3:
+
+flink NUMBER stream throw exception for checkpointed iterative program
+
+Commit_id: 3e6b6beab360b5961cdb2b6d0887f5a31634aa23
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -31,8 +31,8 @@ public class TextFieldHandler extends AbstractTagHandler implements TagGenerator
+
+public void generate() throws IOException {
+
+ Map String, Object  params = context.getParameters();
+
+ Attributes attr = new Attributes();
+
+-        attr.add("type", "text")
+
++        Object type = params.get("type");
+
++        attr.add("type", type == null ? "text" : (String) type)                 .addDefaultToEmpty("name", params.get("name"))                 .addIfExists("size", params.get("size"))                 .addIfExists("maxlength", params.get("maxlength"))
+
+Reference Message:
+
+allow html5 attribute
+
+Generated Message 1:
+
+fix FILE tostring
+
+Generated Message 2:
+
+html5 attribute again
+
+Generated Message 3:
+
+html5 attribute again
+
+Commit_id: 40f7b39c3f1f99de1806a5afb84166090f00d4ce
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -219,7 +219,7 @@ public final class HotSpotTruffleRuntime extends GraalTruffleRuntime {             try {                 
+
+future.get();             
+
+} catch (ExecutionException e) {
+
+-                if (TruffleCompilationExceptionsAreThrown.getValue() && !(e.getCause() instanceof BailoutException)) {
+
++                if (TruffleCompilationExceptionsAreThrown.getValue() && !(e.getCause() instanceof BailoutException) && !((BailoutException) e.getCause()).isPermanent()) {                     
+
+throw new RuntimeException(e.getCause());                 } else {                     
+
+// silently ignored
+
+Reference Message:
+
+truffle do not throw permament compiler exception into guest language
+
+Generated Message 1:
+
+fix faulty check in FILE
+
+Generated Message 2:
+
+fix faulty check in FILE
+
+Generated Message 3:
+
+truffle don t re throw bailout exception from the compiler
+
+Commit_id: d11e601ce4738b3c3c1b13376429705fa0be5e33
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -106,7 +106,7 @@ public class ThreadPool extends AbstractComponent {
+
+.put(Names.BULK, settingsBuilder().put("type", "fixed").put("size", availableProcessors).build())                 .put(Names.GET, settingsBuilder().put("type", "fixed").put("size", availableProcessors).build())                 .put(Names.SEARCH, settingsBuilder().put("type", "fixed").put("size", availableProcessors * 3).put("queue_size", 1000).build())
+
+-                .put(Names.PERCOLATE, settingsBuilder().put("type", "fixed").put("size", availableProcessors * 3).put("queue_size", 1000).build())
+
++                .put(Names.PERCOLATE, settingsBuilder().put("type", "fixed").put("size", availableProcessors).put("queue_size", 1000).build())                 
+
+.put(Names.MANAGEMENT, settingsBuilder().put("type", "scaling").put("keep_alive", "5m").put("size", 5).build())               
+
+ .put(Names.FLUSH, settingsBuilder().put("type", "scaling").put("keep_alive", "5m").put("size", halfProcMaxAt5).build())                 
+
+.put(Names.MERGE, settingsBuilder().put("type", "scaling").put("keep_alive", "5m").put("size", halfProcMaxAt5).build())
+
+Reference Message:
+
+flower the default size of the percolate thread pool
+
+Generated Message 1:
+
+cache already start thread in bulk update thread
+
+Generated Message 2:
+
+core go back to unbounded scale thread pool for management thread revert NUMBER
+
+Generated Message 3:
+
+internal reduce the size of the search thread pool
+
+Commit_id: ef847da2cdaccb95b615900f7fefe71db1bb362f
+
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+========
+Raw Diff:
+
+@@ -38,7 +38,7 @@ public class S3ComponentGetObjectTest extends CamelTestSupport {      
+
+@Test     public void sendIn() throws Exception {
+
+-        result.expectedMessageCount(0);
+
++        result.expectedMessageCount(1);          
+
+template.send("direct:getObject", new Processor() {
+
+Reference Message:
+
+fix test
+
+Generated Message 1:
+
+fix test
+
+Generated Message 2:
+
+delete redundant cast int to int
+
+Generated Message 3:
+
+fix test
+
+Commit_id: 1697ba6074aea80fe341dd07baac4fd85165dd74
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -377,7 +377,7 @@ public class FetchPhase implements SearchPhase {           
+
+ BitSet parentBits = context.bitsetFilterCache().getBitSetProducer(parentFilter).getBitSet(subReaderContext);              
+
+int offset = 0;
+
+-            if (indexSettings.getIndexVersionCreated().onOrAfter(Version.V_7_0_0_alpha1)) {
+
++            if (indexSettings.getIndexVersionCreated().onOrAfter(Version.V_6_5_0)) {               
+
+ /**                 
+
+* Starts from the previous parent and finds the offset of the                 
+
+* nestedSubDocID within the nested children. Nested documents
+
+Reference Message:
+
+adapt bwc version after backport bi
+
+Generated Message 1:
+
+adjust fd for recovery recovery
+
+Generated Message 2:
+
+doc add deprecation warn for delimit payload filter rename
+
+Generated Message 3:
+
+adapt bwc version after backport
+
+Commit_id: 41528c0813fe72162408051e3af29ac42b4708f7
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -52,7 +52,7 @@ public class NicDaoImpl extends GenericDaoBase implements NicDao {
+
+ @Override
+
+public List listIncludingRemovedBy(long instanceId) {
+
+-        SearchCriteria sc = InstanceSearch.create();
+
++        SearchCriteria sc = AllFieldsSearch.create();       
+
+ sc.setParameters("instance", instanceId);       
+
+ return listIncludingRemovedBy(sc);   
+
+ }
+
+Reference Message:
+
+use correct searchbuilder in nicdao
+
+Generated Message 1:
+
+fix deployvm error during zone
+
+Generated Message 2:
+
+bug NUMBER use correct searchbuilder
+
+Generated Message 3:
+
+bug NUMBER use correct searchbuilder
+
+Commit_id: 851d7c2bd2952810e148ef807918bfd19da12f02
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -62,7 +62,7 @@ public class Version extends Service
+
+public String getVersion()
+
+ {
+
+-        if ( version == null )
+
++        if ( version == null || version.equals( "" ) )       
+
+ {             
+
+return "";       
+
+ }
+
+Reference Message:
+
+fix so that FILE getversion doesn t return an empty string
+
+Generated Message 1:
+
+fix so that FILE getversion doesn t return an empty string
+
+Generated Message 2:
+
+fix so that FILE getversion doesn t return an empty string
+
+Generated Message 3:
+
+fix so that FILE getversion doesn t return an empty string
+
+Commit_id: c4b0fd69f64869db0c26e9389e4d511c6ce53d1d
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -111,7 +111,7 @@ public class StatisticsPresentation extends AbstractPresentation {
+
+ }                   
+
+ line = line.replace("\t", "    ");                     
+
+TableItem item = new TableItem(table, SWT.LEFT);
+
+-                    item.setText(0, k == 0 ? attr.getName() : "    |");
+
++                    item.setText(0, k == 0 ? attr.getName() : "");                   
+
+ item.setText(1, line);                     
+
+item.setData(attr);                 
+
+}
+
+Reference Message:
+
+statistic presentation ui fix multiline attribute
+
+Generated Message 1:
+
+fix tab to false link
+
+Generated Message 2:
+
+swt error fix
+
+Generated Message 3:
+
+statistic presentation ui fix multiline attribute
+
+Commit_id: a232d23c70de9f8f4c9dd044bfa21cb46a8e9baa
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -50,8 +50,8 @@ public class AnnotationMapper implements RowMapper Map Long, List AnnotationBo
+
+ Map Long, List AnnotationBo annotationList = new HashMap Long, List AnnotationBo();
+
+for (Cell cell : rawCells) {
+
+-            final byte[] bytes = cell.getRowArray();
+
+-            Buffer buffer = new OffsetFixedBuffer(bytes, cell.getQualifierOffset());
+
++            Buffer buffer = new OffsetFixedBuffer(cell.getQualifierArray(), cell.getQualifierOffset());           
+
+ long spanId = buffer.readLong();            
+
+ if (CellUtil.matchingFamily(cell, HBaseTables.TRACES_CF_ANNOTATION)) {
+
+Reference Message:
+
+NUMBER change hbase NUMBER NUMBER api
+
+Generated Message 1:
+
+issue NUMBER enforce http NUMBER NUMBER NUMBER
+
+Generated Message 2:
+
+remove isolated use of reactor buffer
+
+Generated Message 3:
+
+NUMBER change hbase change
+
+Commit_id: 57e631de46f8de20c3851e1baa31f733aa2a2a46
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -67,8 +67,7 @@ public class OPropertyIndexDefinition extends OAbstractIndexDefinition { 
+
+public Object getDocumentValueToIndex(final ODocument iDocument) {
+
+if (OType.LINK.equals(keyType)) {
+
+-      // This avoid the lazy load of the link
+
+-      final OIdentifiable identifiable = iDocument.rawField(field);
+
++      final OIdentifiable identifiable = iDocument.field(field);
+
+if (identifiable != null)
+
+return createValue(identifiable.getIdentity());       
+
+else
+
+Reference Message:
+
+revert optimize index of property of type link avoinding lazy load
+
+Generated Message 1:
+
+fix issue NUMBER
+
+Generated Message 2:
+
+optimize index of property of type link avoinding lazy load
+
+Generated Message 3:
+
+optimize index of property of type link avoinding lazy load
+
+Commit_id: c6eadfa4eaa12bfc1b1ff8108273c2bcc34f1b38
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -1515,7 +1515,7 @@ public class Translog extends AbstractIndexShardComponent implements IndexShardC      * @return the minimum generation for the sequence number
+
+  */   
+
+ public TranslogGeneration getMinGenerationForSeqNo(final long seqNo) {
+
+-        try (ReleasableLock ignored = writeLock.acquire()) {
+
++        try (ReleasableLock ignored = readLock.acquire()) {             
+
+/*             
+
+* When flushing, the engine will ask the translog for the minimum generation that could contain any sequence number after the             
+
+ * local checkpoint. Immediately after flushing, there will be no such generation, so this minimum generation in this case will
+
+Reference Message:
+
+getmingenerationforseqno should acquire read lock NUMBER
+
+Generated Message 1:
+
+restore log under NUMBER NUMBER
+
+Generated Message 2:
+
+shouldrollgeneration should execute under read lock NUMBER
+
+Generated Message 3:
+
+shouldrollgeneration should execute under read lock NUMBER
+
+Ccommit_id: f1029aaad5b49084aed543db1a7d9c0e60fb7264
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -33,8 +33,8 @@ public class HdfsComponentConfigurationAndDocumentationTest extends CamelTestSup
+
+@Test
+
+ public void testComponentConfiguration() throws Exception {
+
+HdfsComponent comp = context.getComponent("hdfs2", HdfsComponent.class);
+
+-        EndpointConfiguration conf = comp.createConfiguration("hdfs2://localhost/tmp/simple-file?" +
+
+-                "splitStrategy=IDLE:1000,BYTES:5&fileSystemType=LOCAL&fileType=ARRAY_FILE&initialDelay=0");
+
++        EndpointConfiguration conf = comp.createConfiguration("hdfs2://localhost/tmp/simple-file?"
+
++                + "splitStrategy=IDLE:1000,BYTES:5&fileSystemType=LOCAL&fileType=ARRAY_FILE&initialDelay=0");
+
+ assertEquals("LOCAL", conf.getParameter("fileSystemType"));       
+
+ assertEquals("ARRAY_FILE", conf.getParameter("fileType"));
+
+Reference Message:
+
+minor fix c error in camel hdfs2
+
+Generated Message 1:
+
+minor fix c error in FILE
+
+Generated Message 2:
+
+minor fix c error in camel hdfs
+
+Generated Message 3:
+
+minor fix c error in camel hdfs
+
+Commit_id: 104478f9b5a8036e27f86edbcb294ed4268b940d
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -445,7 +445,7 @@ public class VpcVirtualNetworkApplianceManagerImpl extends VirtualNetworkApplian
+
+String macAddress = vlanMacAddress.get(BroadcastDomainType.getValue(BroadcastDomainType.fromString(ipAddr.getVlanTag())));
+
+ IpAddressTO ip =
+
+-                        new IpAddressTO(ipAddr.getAccountId(), ipAddr.getAddress().addr(), add, false, ipAddr.isSourceNat(), ipAddr.getVlanTag(), ipAddr.getGateway(),
+
++                        new IpAddressTO(ipAddr.getAccountId(), ipAddr.getAddress().addr(), add, false, ipAddr.isSourceNat(), BroadcastDomainType.fromString(ipAddr.getVlanTag()).toString(), ipAddr.getGateway(),                                 ipAddr.getNetmask(), macAddress, networkRate, ipAddr.isOneToOneNat());                  ip.setTrafficType(network.getTrafficType());
+
+Reference Message:
+
+if vpc public network with snat enable then will triger this issue
+
+Generated Message 1:
+
+if vpc public network with snat enable then will triger this issue
+
+Generated Message 2:
+
+if vpc public network with snat enable then will triger this issue
+
+Generated Message 3:
+
+if vpc public network with snat enable then will triger this issue
+
+Commit_id: c10189f79aa1d9be1d01bb2ff1b6d7406e2ea7e1
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -116,8 +116,8 @@ public class ApiAuthorizationFilterImpl implements ApiAuthorizationFilter {         methodSecurityAnotations.put("DELETE:/store/order/{orderId}", true);         
+
+methodSecurityAnotations.put("POST:/store/order", true);       
+
+ methodSecurityAnotations.put("POST:/user", false);
+
+-    methodSecurityAnotations.put("POST:/user/createWithArray", false);
+
+-    methodSecurityAnotations.put("POST:/user/createWithList", false);
+
++        methodSecurityAnotations.put("POST:/user/createWithArray", false);
+
++        methodSecurityAnotations.put("POST:/user/createWithList", false);         
+
+methodSecurityAnotations.put("PUT:/user/{username}", true);       
+
+ methodSecurityAnotations.put("DELETE:/user/{username}", true);         
+
+methodSecurityAnotations.put("GET:/user/{username}", false);
+
+Reference Message:
+
+format
+
+Generated Message 1:
+
+format
+
+Generated Message 2:
+
+format
+
+Generated Message 3:
+
+format
+
+Commit_id: 6252567fb3d595b07b761cbbe2c4b564e96a4520
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -1481,7 +1481,7 @@ public class VmwareResource implements StoragePoolResource, ServerResource, Vmwa
+
+s_logger.info("Prepare NIC device based on NicTO: " + _gson.toJson(nicTo));                
+
+ Pair networkInfo = prepareNetworkFromNicInfo(vmMo.getRunningHost(), nicTo);
+
+-                if (_nexusVSwitch) {
+
++                if (mgr.getNexusVSwitchGlobalParameter()) {                     
+
+String dvSwitchUuid;                     
+
+ManagedObjectReference dcMor = hyperHost.getHyperHostDatacenter();                     
+
+DatacenterMO dataCenterMo = new DatacenterMO(context, dcMor)
+
+Reference Message:
+
+c NUMBER system vms and router vms do not come up after upgrade from NUMBER NUMBER to bonita
+
+Generated Message 1:
+
+fix findbugs warn
+
+Generated Message 2:
+
+sonar fix code smell
+
+Generated Message 3:
+
+c NUMBER system vms and router vms do not come up after upgrade from NUMBER NUMBER to bonita
+
+Commit_id: b3e05a7dcbf3e26b991d41235ad895c358e030f8
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -193,7 +193,7 @@ class NeoServiceBatchImpl implements NeoService             
+
+RelationshipBatchImpl rel = new RelationshipBatchImpl(                  
+
+new SimpleRelationship( (int)relId, (int) id,                    
+
+ (int) otherNode.getId(), type ), neoService, emptyProps() )
+
+;-            neoService.addRelationshipToCache( id, rel );
+
++            neoService.addRelationshipToCache( relId, rel );           
+
+ return rel;       
+
+ }
+
+Reference Message:
+
+fix cache bug cache on node id instead of rel id
+
+Generated Message 1:
+
+fix cache bug cache on node id instead of rel id
+
+Generated Message 2:
+
+fix cache bug cache on node id instead of rel id
+
+Generated Message 3:
+
+fix cache bug cache on node id instead of rel id
+
+Commit_id: 37c8888e22bfdcc02014011f467173efbf2e1de8
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -113,7 +113,7 @@ public class NeoServer implements WrapperListener {             
+
+log.info("Successfully shutdown Neo Server on port [%d], database [%s]", portNo, location);             
+
+return 0;         } catch (Exception e) {
+
+-            log.error("Failed to cleanly shutdown Neo Server on port [%d], database [%s]", portNo, location);+            log.error("Failed to cleanly shutdown Neo Server on port [%d], database [%s]. Reason [%s] ", portNo, location, e.getMessage());           
+
+ return 1;       
+
+ }   
+
+ }
+
+Reference Message:
+
+add more illustrative log when server fails to boot include exception message
+
+Generated Message 1:
+
+add more illustrative log when server fails to boot include exception message
+
+Generated Message 2:
+
+add more illustrative log when server fails to boot include exception message
+
+Generated Message 3:
+
+add more illustrative log when server fails to boot include exception message
+
+Commit_id: 6977b7f845676911b3337d1df14f228dd3b238e6
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -190,7 +190,7 @@ public class SharedCacheInstanceManager implements CacheInstanceManager {     
+
+protected Cache createSharedCache(Settings settings, Properties properties)     
+
+{         
+
+String configResource = PropertiesHelper.getString(CACHE_RESOURCE_PROP, properties, DEFAULT_CACHE_RESOURCE);
+
+-        return DefaultCacheFactory.getInstance().createCache(configResource, false);
+
++        return new DefaultCacheFactory().createCache(configResource, false);     
+
+}          /**
+
+Reference Message:
+
+upgraded to use a non deprecate factory constructor
+
+Generated Message 1:
+
+hotfix fix test apply to deprecate field
+
+Generated Message 2:
+
+upgraded to use a non deprecate factory constructor
+
+Generated Message 3:
+
+upgraded to use a non deprecate factory constructor
+
+Commit_id: 7f58da93511a81026ef734684fb25b5c0fb47196
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -303,7 +303,7 @@ public class ZooClient extends AbstractZooKeeperManager         
+
+try         
+
+{           
+
+ zooKeeper.create( machinePath, data,
+
+-                    ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT );
+
++                    ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL );       
+
+ }         
+
+catch ( KeeperException e )         {
+
+Reference Message:
+
+ha server config be ephemeral
+
+Generated Message 1:
+
+ha server config be ephemeral
+
+Generated Message 2:
+
+ha server config be ephemeral
+
+Generated Message 3:
+
+ha server config be ephemeral
+
+Commit_id: 4db0705f1af1cff6d0d9dac07ac984e56175671b
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -1659,7 +1659,7 @@ public class DefaultCamelContext extends ServiceSupport implements ModelCamelCon    
+
+ public synchronized RouteDefinition getRouteDefinition(String id) {         
+
+for (RouteDefinition route : routeDefinitions) {
+
+-            if (route.getId() != null && route.getId().equals(id)) {
+
++            if (route.idOrCreate(nodeIdFactory).equals(id)) {               
+
+ return route;           
+
+ }       
+
+ }
+
+Reference Message:
+
+fix potential npe
+
+Generated Message 1:
+
+fix problem on http github com orientechnologies orientdb issue NUMBER
+
+Generated Message 2:
+
+fix potential npe
+
+Generated Message 3:
+
+fix potential npe
+
+Commit_id: 5827b3d503cfc5763470be5290346e345aff26f0
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -340,7 +340,7 @@ public class Lwjgl3Graphics implements Graphics, Disposable {           
+
+ Lwjgl3DisplayMode currentMode = (Lwjgl3DisplayMode) getDisplayMode();             
+
+int windowPosX = (currentMode.width - width) / 2;           
+
+ int windowPosY = (currentMode.height - height) / 2;
+
+-            GLFW.glfwSetWindowMonitor(window.getWindowHandle(), 0,
+
++            GLFW.glfwSetWindowMonitor(window.getWindowHandle(), currentMode.getMonitor(),                     windowPosX, windowPosY, width, height, currentMode.refreshRate);       
+
+ }       
+
+ updateFramebufferInfo();
+
+Reference Message:
+
+fix NUMBER restore window on correct monitor NUMBER
+
+Generated Message 1:
+
+focus fix check on follow monitor NUMBER
+
+Generated Message 2:
+
+revert fix NUMBER restore window on correct monitor NUMBER
+
+Generated Message 3:
+
+revert fix NUMBER restore window on correct monitor NUMBER
+
+Commit_id: f647602e19a0ce46b5d7800d6658b54ff8acbe95
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -5995,7 +5995,7 @@ public static void startMetaStore(int port, HadoopThriftAuthBridge bridge,       // Server will create new threads up to max as necessary. After an idle       
+
+// period, it will destroy threads to keep the number of threads in the       
+
+// pool to min.
+
+-      int maxMessageSize = conf.getIntVar(HiveConf.ConfVars.METASTORESERVERMAXMESSAGESIZE);
+
++      long maxMessageSize = conf.getIntVar(HiveConf.ConfVars.METASTORESERVERMAXMESSAGESIZE);     
+
+ int minWorkerThreads = conf.getIntVar(HiveConf.ConfVars.METASTORESERVERMINTHREADS);     
+
+ int maxWorkerThreads = conf.getIntVar(HiveConf.ConfVars.METASTORESERVERMAXTHREADS);       boolean tcpKeepAlive = conf.getBoolVar(HiveConf.ConfVars.METASTORE_TCP_KEEP_ALIVE);
+
+Reference Message:
+
+hive NUMBER change value type from int to long for hiveconf confvars metastoreservermaxmessagesize ferdinand xu review by xuefu zhang
+
+Generated Message 1:
+
+hive NUMBER suppress a type message for FILE max endpoint type yongzhi chen review by brock noland
+
+Generated Message 2:
+
+hive NUMBER llap fails to start with java lang numberformatexception shinichi yamashita review by sergey shelukhin
+
+Generated Message 3:
+
+hive NUMBER change to read a long for FILE confvars metastoreservermaxmessagesize aihua xu review by yongzhi chen
+
+Commit_id: 21aecbcfff21d33f1785221be73f880d728632fa
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -110,7 +110,7 @@ public class CreateNodeFunctionalTest     
+
+{         
+
+Client client = Client.create();         
+
+WebResource resource = client.resource( server.restApiUri() + "node/" );
+
+-        ClientResponse response = resource.type( MediaType.APPLICATION_JSON_TYPE ).accept( MediaType.APPLICATION_JSON ).entity( "{\"foo\" : \"bar\"}" ).post( ClientResponse.class );
+
++        ClientResponse response = resource.accept( MediaType.APPLICATION_JSON ).entity( "{\"foo\" : \"bar\"}" ).post( ClientResponse.class );         
+
+assertEquals( 400, response.getStatus() );    
+
+ }
+
+Reference Message:
+
+revert a change that make an intentional fail condition into a passing condition
+
+Generated Message 1:
+
+revert a change that make an intentional fail condition into a passing condition
+
+Generated Message 2:
+
+revert a change that make an intentional fail condition into a passing condition
+
+Generated Message 3:
+
+revert a change that make an intentional fail condition into a passing condition
+
+Commit_id: 70c581cdf3ebf1c0a2e3a66f28836bf9ae4e0022
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -1041,7 +1041,7 @@ public class Redwood {     
+
+*/     
+
+public static void threadAndRun(String title, Iterable runnables, int numThreads){       
+
+// (short circuit if single thread)
+
+-      if (numThreads <= 1 || isThreaded) {
+
++      if (numThreads <= 1 || isThreaded || (runnables instanceof Collection && ((Collection) runnables).size() <= 1)) {         
+
+startTrack( "Threads (" + title + ")" );         
+
+for (Runnable toRun : runnables) { toRun.run(); }         
+
+endTrack( "Threads (" + title + ")" );
+
+Reference Message:
+
+don t multithread if there be only one task
+
+Generated Message 1:
+
+don t multithread if there be only one task
+
+Generated Message 2:
+
+don t multithread if there be only one task
+
+Generated Message 3:
+
+don t multithread if there be only one task
+
+Commit_id: 76e53d4965d9882e38886cdde8c7054ff644d136
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -594,7 +594,7 @@ public class VirtualMachineManagerImpl implements VirtualMachineManager, Listene        
+
+ T startedVm = null;         
+
+ServiceOfferingVO offering = _offeringDao.findById(vm.getServiceOfferingId());
+
+-        VMTemplateVO template = _templateDao.findById(vm.getTemplateId());
+
++        VMTemplateVO template = _templateDao.findByIdIncludingRemoved(vm.getTemplateId());          DataCenterDeployment plan = new DataCenterDeployment(vm.getDataCenterIdToDeployIn(), vm.getPodIdToDeployIn(), null, null, null);         
+
+if(planToDeploy != null){
+
+Reference Message:
+
+find template that be not remove
+
+Generated Message 1:
+
+find template that be not remove
+
+Generated Message 2:
+
+find template that be not remove
+
+Generated Message 3:
+
+find template that be not remove
+
+Commit_id: 186654b299050693d16105c3755a36f38e486cbb
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -86,7 +86,7 @@ public class PostgreTableManager extends SQLTableManager<PostgreTableBase, Postg     
+
+@Override     
+
+protected void addObjectExtraActions(List actions, NestedObjectCommand command, Map options) {       
+
+ // Add comments
+
+-        if (command.getProperty("description") != null) {
+
++        if (!CommonUtils.isEmpty(command.getObject().getDescription())) {             
+
+actions.add(new SQLDatabasePersistAction(                 
+
+"Comment table",                 "COMMENT ON TABLE " + command.getObject().getFullyQualifiedName(DBPEvaluationContext.DDL) +
+
+Reference Message:
+
+NUMBER postgresql table comment in ddl fix
+
+Generated Message 1:
+
+NUMBER pg table column comment in ddl for resolve column
+
+Generated Message 2:
+
+http issue apache org jira browse amq NUMBER
+
+Generated Message 3:
+
+NUMBER pg oracle table comment modify
+
+Commit_id: b506ddc854eeee7e3f884c19f146b3b01adb3054
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -36,7 +36,7 @@ public class FileConsumeNoopIdempotentDisabledTest extends ContextTestSupport {     
+
+public void testNoop() throws Exception {       
+
+ MockEndpoint mock = getMockEndpoint("mock:result");         
+
+// should be able to read the file multiple times as idempotent is false
+
+-        mock.expectedMessageCount(2);
+
++        mock.expectedMinimumMessageCount(2);          
+
+assertMockEndpointsSatisfied();     
+
+}
+
+Reference Message:
+
+fix test
+
+Generated Message 1:
+
+fix test
+
+Generated Message 2:
+
+fix test
+
+Generated Message 3:
+
+fix test
+
+Commit_id: 4314519bcd87425e9866385e7c91f2f8b1a34211
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -1361,7 +1361,7 @@ public abstract class CitrixResourceBase implements ServerResource, HypervisorRe            
+
+ if (vmSpec.getLimitCpuUse()) {               
+
+ // CPU cap is per VM, so need to assign cap based on the number of vcpus
+
+-                utilization = (int)((speed * 0.99 * vmSpec.getCpus()) / _host.speed * 100);
+
++                utilization = (int) ((vmSpec.getMaxSpeed() * 0.99 * vmSpec.getCpus()) / _host.speed * 100);             }              
+
+vcpuParams.put("weight", Integer.toString(cpuWeight));
+
+Reference Message:
+
+cloudstack NUMBER
+
+Generated Message 1:
+
+cloudstack NUMBER
+
+Generated Message 2:
+
+cloudstack NUMBER
+
+Generated Message 3:
+
+cloudstack NUMBER
+
+Commit_id: 71d547ba875c1a7d936710512464a4343c66f28b
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -848,7 +848,7 @@ public final class Intersector {     
+
+* @param verts2 Vertices of the second polygon.     
+
+* @param mtv A Minimum Translation Vector to fill in the case of a collision, or null (optional).     
+
+* @return Whether polygons overlap. */
+
+-        public static boolean overlapConvexPolygons (float[] verts1, int offset1, int count1, float[] verts2, int offset2, int count2,
+
++    public static boolean overlapConvexPolygons (float[] verts1, int offset1, int count1, float[] verts2, int offset2, int count2,         MinimumTranslationVector mtv) {       
+
+ float overlap = Float.MAX_VALUE;         
+
+loat smallestAxisX = 0;
+
+Reference Message:
+
+update FILE java
+
+Generated Message 1:
+
+fix FILE compound compilation
+
+Generated Message 2:
+
+fix FILE tointbits so it return int instead of float
+
+Generated Message 3:
+
+update FILE java
+
+Commit_id: 60c0e753f1b59df5c3cb4513b274e5fde35c1a4e
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -703,7 +703,7 @@ public class VirtualMachineManagerImpl implements VirtualMachineManager, Listene                         }                     }                     
+
+if (dest == null) {
+
+-                        throw new InsufficientServerCapacityException("Unable to create a deployment for " + vmProfile + " due to lack of VLAN available.", DataCenter.class, plan.getDataCenterId());
+
++                        throw new InsufficientServerCapacityException("Unable to create a deployment for " + vmProfile, DataCenter.class, plan.getDataCenterId());                   
+
+ }               
+
+ }
+
+Reference Message:
+
+bug NUMBER revert the change a the error can be due to several factor in deployment of domain router
+
+Generated Message 1:
+
+bug NUMBER well exception message
+
+Generated Message 2:
+
+bug NUMBER well error message
+
+Generated Message 3:
+
+bug NUMBER revert the change a the error can be due to several factor in deployment of domain router
+
+Commit_id: 4922eda764d2a0cf33f93a56d67b27923939fe6e
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -64,8 +64,7 @@ public class CleanupTest extends SchemaLoader     
+
+@Test   
+
+ public void testCleanup() throws IOException, ExecutionException, InterruptedException, ConfigurationException     {
+
+-        StorageService.instance.initServer(0);
+
++        StorageService.instance.getTokenMetadata().clearUnsafe();         
+
+Table table = Table.open(TABLE1);         
+
+ColumnFamilyStore cfs = table.getColumnFamilyStore(CF2);
+
+Reference Message:
+
+fix FILE
+
+Generated Message 1:
+
+fix FILE
+
+Generated Message 2:
+
+fix FILE
+
+Generated Message 3:
+
+fix FILE
+
+Commit_id: 4b83a6f9d9c00fe662ddb9db4533df8b9b96883d
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -118,8 +118,7 @@ public class ConcurrentMapPutIfAbsentTester K, V  extends AbstractMapTester K, V   public void testPutIfAbsent_putWithNullValueUnsupported() {     
+
+try {       
+
+getMap().putIfAbsent(k0(), null);
+
+-      fail("putIfAbsent(present, null) should throw");
+
+-    } catch (NullPointerException expected) {
+
++    } catch (NullPointerException tolerated) {     
+
+}     expectUnchanged();     
+
+expectNullValueMissingWhenNullValuesUnsupported(
+
+Reference Message:
+
+do not require an exception to be thrown on a no op putifabsent if null be unsupported
+
+Generated Message 1:
+
+don t put an exception on no op putifabsent if put be unsupported
+
+Generated Message 2:
+
+don t require an exception to be thrown on a no op putifabsent if put be unsupported
+
+Generated Message 3:
+
+don t require an exception to be thrown on a no op putifabsent if put be unsupported
+
+Commit_id: 5c981c7f47bc4a3e30870dcadbf092328d4b13fc
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -238,7 +238,7 @@ public class TrafficCounter {     
+
+*     
+
+* @param newLastTime      */
+
+-    protected void resetAccounting(long newLastTime) {
+
++    void resetAccounting(long newLastTime) {       
+
+ synchronized (lastTime) {           
+
+ long interval = newLastTime - lastTime.getAndSet(newLastTime);           
+
+ if (interval == 0) {
+
+Reference Message:
+
+make another method in FILE package private
+
+Generated Message 1:
+
+make sl unused constructor
+
+Generated Message 2:
+
+make private method static to make it clearer that it access and modifies static state
+
+Generated Message 3:
+
+make more method in FILE package private
+
+Commit_id: 079252700b28f56b208d7fa5ac5806e1c6ce3c52
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -38,7 +38,7 @@ public class DiffFunctionTest extends TestCase { 
+
+ }  
+
+ public static void gradientCheck(DiffFunction f) {
+
+-    for (int deg = -2; deg > -8; deg--) {
+
++    for (int deg = -2; deg > -7; deg--) {     
+
+ double eps = Math.pow(10, deg);       
+
+System.err.println("testing for eps " + eps);       
+
+gradientCheck(f, eps);
+
+Reference Message:
+
+adjust allow tolerance for norm so test pass
+
+Generated Message 1:
+
+header should respect norm norm
+
+Generated Message 2:
+
+followup to r1633936 increment the correct variable
+
+Generated Message 3:
+
+adjust allow tolerance for norm so test pass
+
+Commit_id: 6811abc8e8025e23af5885901c7cf7b154b9e0be
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -1057,7 +1057,7 @@ public class SlotManagerTest extends TestLogger {             
+
+assertEquals(1, slotManager.getNumberRegisteredSlots());            
+
+ // wait for the timeout call to happen
+
+-            verify(resourceActions, timeout(taskManagerTimeout.toMilliseconds() * 3L)).releaseResource(eq(taskExecutorConnection.getInstanceID()));
+
++            verify(resourceActions, timeout(taskManagerTimeout.toMilliseconds() * 3L).atLeast(1)).releaseResource(eq(taskExecutorConnection.getInstanceID()));              
+
+assertEquals(1, slotManager.getNumberRegisteredSlots());
+
+Reference Message:
+
+hotfix harden FILE testtaskmanagertimeoutdoesnotremoveslots
+
+Generated Message 1:
+
+doc hardens logger gae typo fix in case of http header
+
+Generated Message 2:
+
+hotfix harden FILE testheartbeattimeoutwithjobmanager by increase timeout
+
+Generated Message 3:
+
+hotfix harden FILE testheartbeattimeoutwithjobmanager by increase timeout
+
+Commit_id: e4849464f070e987f7fff5ded79ec47f65dd6353
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -55,7 +55,7 @@ import com.oracle.graal.nodeinfo.*; 
+
+@NodeInfo public abstract class Node implements Cloneable, Formattable { 
+
+-    public final static boolean USE_GENERATED_NODES = Boolean.parseBoolean(System.getProperty("graal.useGeneratedNodes", "false"));
+
++    public final static boolean USE_GENERATED_NODES = Boolean.parseBoolean(System.getProperty("graal.useGeneratedNodes", "true"));      
+
+static final int DELETED_ID_START = -1000000000;     
+
+static final int INITIAL_ID = -1;
+
+Reference Message:
+
+re enable use of generate node
+
+Generated Message 1:
+
+disable use of generate node
+
+Generated Message 2:
+
+re enable use of generate node by default
+
+Generated Message 3:
+
+re enable use of generate node by default
+
+Commit_id: fa8cc9ce20b98b6e6094031512d329bfa27dc43b
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -268,8 +268,7 @@ public abstract class Usage implements Service {                 }                          
+
+};
+
+-            listenerNotifier.run();
+
+-           //getExecutor().execute(listenerNotifier);
+
++            getExecutor().execute(listenerNotifier);         
+
+}     
+
+}
+
+Reference Message:
+
+fix for http issue apache org activemq browse amq NUMBER
+
+Generated Message 1:
+
+fix unused exchange i be non serializable
+
+Generated Message 2:
+
+hotfix remove execute that follow print in quickstart FILE job
+
+Generated Message 3:
+
+fix for http issue apache org activemq browse amq NUMBER
+
+Commit_id: 99966f58e74ceab189d634ab27c672b4ba36acde
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -395,7 +395,7 @@ public class FileOperations implements GenericFileOperations {                     throw new GenericFileOperationFailedException("Cannot delete file: " + to);               
+
+ }             } else {
+
+-                throw new GenericFileOperationFailedException("Cannot moved existing file from: " + fileName + " to: " + to + " as there already exists a file: " + to);
+
++                throw new GenericFileOperationFailedException("Cannot move existing file from: " + fileName + " to: " + to + " as there already exists a file: " + to);           
+
+ }       
+
+ }
+
+Reference Message:
+
+fix exception message typo
+
+Generated Message 1:
+
+fix exception message typo
+
+Generated Message 2:
+
+fix exception message typo
+
+Generated Message 3:
+
+fix exception message typo
+
+Commit_id: 4af1c5d2e3b062d3ff9bf35e517d79e92fe3ab50
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -210,7 +210,7 @@ public class EnglishGrammaticalRelations {         
+
+ // This case is separated out from the previous case to           
+
+// avoid conflicts with advcl when you have phrases such as           
+
+// "but only because ..."
+
+-          "VP|S|SBAR|SBARQ|SINV|SQ|RRC < (CC|CONJP $-- @SBAR $+ @SBAR=target)", +          "SBAR < (CC|CONJP $-- @SBAR $+ @SBAR=target)",            // non-parenthetical or comma in suitable phrase with conj then adverb to left           "VP|S|SBAR|SBARQ|SINV|SQ|RRC < (CC|CONJP $-- !/^(?:``|-LRB-|PRN|PP|ADVP|RB)/ $+ (ADVP $+ !/^(?:PRN|``|''|-[LR]RB-|,|:|\\.)$/=target))",            // content phrase to the right of a comma or a parenthetical Reference Message: this rule only applies when the top level be an sbar so this will save a few cpu cycle Generated Message 1: this rule only applies when the top level be an sbar so this will save an cpu cycle Generated Message 2: this rule only applies when the top level be an sbar so this will save a few cpu cycle Generated Message 3: this rule only applies when the top level be an sbar so this will save a few cpu cycle
+
+Commit_id: 9dc2c86b6303886d366263db2230fe927d1acf4d
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -32,7 +32,7 @@ public class TrainParserTest extends TestCase {       
+
+tree.percolateHeadAnnotations(binaryHeadFinder);        
+
+List transitions = CreateTransitionSequence.createTransitionSequence(tree);
+
+-      State state = TrainParser.initialStateFromTrainingTree(tree);
+
++      State state = ShiftReduceParser.initialStateFromGoldTagTree(tree);     
+
+ for (Transition transition : transitions) {       
+
+ state = transition.apply(state);     
+
+ }
+
+Reference Message:
+
+fix compile error
+
+Generated Message 1:
+
+fix compile error
+
+Generated Message 2:
+
+fix compile error
+
+Generated Message 3:
+
+fix compile error
+
+Commit_id: e27a0d02b34c4b40251d206ccb214d07b983f94c
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -30,7 +30,7 @@ public class QuartzRouteFireNowTest extends BaseQuartzTest {     
+
+@Test   
+
+ public void testQuartzRoute() throws Exception {         
+
+resultEndpoint = getMockEndpoint("mock:result");
+
+-        resultEndpoint.expectedMessageCount(2);
+
++        resultEndpoint.expectedMinimumMessageCount(2);       
+
+ resultEndpoint.message(0).header("triggerName").isEqualTo("myTimerName");       
+
+ resultEndpoint.message(0).header("triggerGroup").isEqualTo("myGroup");
+
+Reference Message:
+
+fix test on window
+
+Generated Message 1:
+
+fix test on solaris report by team city
+
+Generated Message 2:
+
+fix test on other box
+
+Generated Message 3:
+
+fix test on other box
+
+Commit_id: 1a8a22256592dd5b5a78df7c6eb03d1ca0f02d7e
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -79,9 +79,7 @@ public abstract class AbstractTestElement implements TestElement, Serializable,             }             
+
+clonedElement.setRunningVersion(runningVersion);             
+
+return clonedElement;
+
+-        } catch (InstantiationException e) {
+
+-            throw new AssertionError(e); // clone should never return null
+
+-        } catch (IllegalAccessException e) {
+
++        } catch (InstantiationException|IllegalAccessException e) {           
+
+ throw new AssertionError(e); // clone should never return null       
+
+ }   
+
+ }
+
+Reference Message:
+
+java7 multiple exception catch
+
+Generated Message 1:
+
+java7 multiple exception catch
+
+Generated Message 2:
+
+findbugs don t use generic exception
+
+Generated Message 3:
+
+java7 multiple exception catch
+
+Commit_id: f2949ae12baafc27b7d04816afd551bd4d80f45f
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -84,7 +84,8 @@ public LogDivertAppender(Layout layout, OperationManager operationManager, boole     } else {     
+
+ // in non verbose mode, show only select logger messages     
+
+ String[] inclLoggerNames = { "org.apache.hadoop.mapreduce.JobSubmitter",
+
+-          "org.apache.hadoop.mapreduce.Job", "SessionState", Task.class.getName() };
+
++          "org.apache.hadoop.mapreduce.Job", "SessionState", Task.class.getName(),
+
++          "org.apache.hadoop.hive.ql.exec.spark.status.SparkJobMonitor" };     
+
+ addFilter(new NameFilter(false, inclLoggerNames));   
+
+ } 
+
+ }
+
+Reference Message:
+
+hive NUMBER enable beeline query progress information for spark job spark branch chengxiang li via brock
+
+Generated Message 1:
+
+hive NUMBER beeline doesn t show spark job progress info spark branch jimmy via xuefu
+
+Generated Message 2:
+
+hive NUMBER beeline doesn t show spark job progress info spark branch jimmy via xuefu
+
+Generated Message 3:
+
+hive NUMBER beeline doesn t show spark task progress info spark branch jimmy via xuefu
+
+Commit_id: f2716a555bf3bbeadd05538475b92aaf7aabe411
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -35,8 +35,8 @@ public class CamelJbpmTest extends AbstractSpringBootTestSupport {   
+
+ public static ITestConfig createTestConfig() {       
+
+ return new ITestConfigBuilder()               
+
+ .module(inferModuleName(CamelJbpmTest.class))
+
+-                .dependency("org.drools:drools-core:7.21.0.Final")
+
+-                .dependency("org.drools:drools-compiler:7.21.0.Final")
+
++                .dependency("org.drools:drools-core:7.22.0.Final")
+
++                .dependency("org.drools:drools-compiler:7.22.0.Final")                 
+
+.unitTestExpectedNumber(0)                 
+
+.build();   
+
+ }
+
+Reference Message:
+
+camel jbpm fix itest for spring boot
+
+Generated Message 1:
+
+fix jbpm boot after upgrade
+
+Generated Message 2:
+
+fix camel jbpm sb itest after upgrade
+
+Generated Message 3:
+
+fix camel jbpm sb itest after upgrade
+
+Commit_id: 91f2920d8b21764f079033af299748ba5261fdcd
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -848,7 +848,7 @@ public class OrientVertex extends OrientElement implements OrientExtendedVertex     
+
+// since the label for the edge can potentially get re-assigned   
+
+ // before being pushed into the OrientEdge, the   
+
+ // null check has to go here.
+
+-    if (label == null)
+
++    if (label == null && graph.isStandardElementConstraints())       label = "E";      
+
+if (canCreateDynamicEdge(outDocument, inDocument, outFieldName, inFieldName, fields, label)) {
+
+Reference Message:
+
+small fix to restore null check on label because bp need it
+
+Generated Message 1:
+
+small fix to restore null check on label because bp need it
+
+Generated Message 2:
+
+small fix to restore null check on label because bp need it
+
+Generated Message 3:
+
+small fix to restore null check on label because bp need it
+
+Commit_id: fd4dd55890a5acb4c01a3032665193330ba51477
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -484,7 +484,7 @@ public class UnicastZenPingTests extends ESTestCase {             
+
+new TransportService(Settings.EMPTY, transport, threadPool, TransportService.NOOP_TRANSPORT_INTERCEPTOR, null);         
+
+closeables.push(transportService);       
+
+ final AtomicInteger idGenerator = new AtomicInteger();
+
+-        final TimeValue resolveTimeout = TimeValue.timeValueMillis(randomIntBetween(1, 100));
+
++        final TimeValue resolveTimeout = TimeValue.timeValueMillis(randomIntBetween(100, 200));       
+
+ try {             
+
+final List discoveryNodes = UnicastZenPing.resolveDiscoveryNodes(               
+
+ executorService,
+
+Reference Message:
+
+increase low bound for random resolve timeout in test
+
+Generated Message 1:
+
+distribute activate in FILE
+
+Generated Message 2:
+
+increase resolve timeout in unknown host test
+
+Generated Message 3:
+
+increase resolve timeout in unknown host test
+
+Commit_id: 1576eaba25837d3c4d51a72cb8075a206257b61a
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -56,7 +56,7 @@ import static org.junit.Assert.*; public class ZooKeeperLeaderElectionTest extends TestLogger {     
+
+private TestingCluster testingCluster;   
+
+ private static final String TEST_URL = "akka//user/jobmanager";
+
+-    private static final FiniteDuration timeout = new FiniteDuration(20000, TimeUnit.MILLISECONDS);
+
++    private static final FiniteDuration timeout = new FiniteDuration(60000, TimeUnit.MILLISECONDS);      @Before     
+
+public void before() {
+
+Reference Message:
+
+flink NUMBER test increase timeout of FILE to 60
+
+Generated Message 1:
+
+flink NUMBER test increate ask timeout in FILE
+
+Generated Message 2:
+
+flink NUMBER test increate ask timeout in FILE
+
+Generated Message 3:
+
+flink NUMBER test increate ask timeout in FILE
+
+Commit_id: e96e5c0b5f4a79c892965509026eafae67693e1f
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -85,7 +85,7 @@ public class OServerCommandPutDocument extends OServerCommandDocumentAbstract {      
+
+ currentDocument.save(); 
+
+-      iResponse.send(OHttpUtils.STATUS_OK_CODE, OHttpUtils.STATUS_OK_DESCRIPTION, OHttpUtils.CONTENT_TEXT_PLAIN, doc.toJSON(),
+
++      iResponse.send(OHttpUtils.STATUS_OK_CODE, OHttpUtils.STATUS_OK_DESCRIPTION, OHttpUtils.CONTENT_TEXT_PLAIN, currentDocument.toJSON(),           null, true);      
+
+} finally {
+
+Reference Message:
+
+fix issue NUMBER
+
+Generated Message 1:
+
+fix issue NUMBER
+
+Generated Message 2:
+
+fix http github com orientechnologies orientdb issue NUMBER
+
+Generated Message 3:
+
+fix issue NUMBER
+
+Commit_id: 6d555e23f0f46a779a05dd49798b9d4396236c39
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -981,7 +981,7 @@ public class UIUtils {       
+
+ if (element == null) {             
+
+propDialog = PreferencesUtil.createPreferenceDialogOn(shell, defPageID[0], defPageID, null, PreferencesUtil.OPTION_NONE);       
+
+ } else {
+
+-            propDialog = PreferencesUtil.createPropertyDialogOn(shell, element, defPageID[0], defPageID, null, PreferencesUtil.OPTION_NONE);
+
++            propDialog = PreferencesUtil.createPropertyDialogOn(shell, element, defPageID[0], null, null, PreferencesUtil.OPTION_NONE);         
+
+}         
+
+if (propDialog != null) {             propDialog.open();
+
+Reference Message:
+
+property page dialog fix
+
+Generated Message 1:
+
+hive NUMBER maven plugin configuration
+
+Generated Message 2:
+
+fix compilation from fsinfo init change in core
+
+Generated Message 3:
+
+property editor dialog fix
+
+Commit_id: a282e7e4cf3875dcf34873f51448ec6c6b113c5c
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -85,7 +85,7 @@ public class OServerCommandPutDocument extends OServerCommandDocumentAbstract {        
+
+currentDocument.save(); 
+
+-      iResponse.send(OHttpUtils.STATUS_OK_CODE, OHttpUtils.STATUS_OK_DESCRIPTION, OHttpUtils.CONTENT_TEXT_PLAIN, doc.toJSON(),
+
++      iResponse.send(OHttpUtils.STATUS_OK_CODE, OHttpUtils.STATUS_OK_DESCRIPTION, OHttpUtils.CONTENT_TEXT_PLAIN, currentDocument.toJSON(),           null, true);      
+
+} finally {
+
+Reference Message:
+
+fix issue NUMBER
+
+Generated Message 1:
+
+fix issue NUMBER
+
+Generated Message 2:
+
+fix http github com orientechnologies orientdb issue NUMBER
+
+Generated Message 3:
+
+fix issue NUMBER
+
+Commit_id: b84ea0e0bfe40a350ebf5c07fcc1e55a7328ad0c
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -104,7 +104,8 @@ public class SqlGenerator extends SqlGeneratorBase implements ErrorReporter {     
+
+protected void out(String s) {       
+
+ if ( exprs.size() > 1 ) {             
+
+super.out( s );
+
+-        } else {
+
++        }
+
++        else {             
+
+writer.clause( s );       
+
+ }
+
+ }
+
+Reference Message:
+
+fix checkstyle error
+
+Generated Message 1:
+
+checkstyle
+
+Generated Message 2:
+
+checkstyle
+
+Generated Message 3:
+
+fix checkstyle error
+
+Commit_id: c16a22b0fc0c22691423af1b84c3fc8439f22c1f
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -710,7 +710,7 @@ public abstract class CommonAbstractStore      protected void registerIdFromUpdateRecord( long id )     {
+
+-        highestUpdateRecordId = Math.max( highestUpdateRecordId, id );
+
++        highestUpdateRecordId = Math.max( highestUpdateRecordId, id + 1 );     
+
+}      
+
+protected void updateHighId()
+
+Reference Message:
+
+fix high id update bug
+
+Generated Message 1:
+
+fix high id update bug
+
+Generated Message 2:
+
+fix high id update bug
+
+Generated Message 3:
+
+fix high id update bug
+
+Commit_id: 7e18d67fc9bb9d11bf0ef4a1feab61a859566b2d
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -84,7 +84,7 @@ public class FlinkStreamingPipelineTranslator extends FlinkPipelineTranslator {     StreamTransformTranslator translator =         
+
+FlinkStreamingTransformTranslators.getTranslator(transform); 
+
+-    if (translator == null && applyCanTranslate(transform, node, translator)) {
+
++    if (translator == null || !applyCanTranslate(transform, node, translator)) {       
+
+LOG.info(node.getTransform().getClass().toString());       
+
+throw new UnsupportedOperationException(         
+
+ "The transform " + transform + " is currently not supported.");
+
+Reference Message:
+
+fix condition in FILE
+
+Generated Message 1:
+
+fix condition in FILE
+
+Generated Message 2:
+
+fix condition in FILE
+
+Generated Message 3:
+
+fix condition in FILE
+
+Commit_id: 42a82539932abde45384b49226a8e32de44cfff1
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -148,7 +148,7 @@ public class ProviderManager extends AbstractAuthenticationManager implements In      
+
+private void checkIfValidList(List listToCheck) {       
+
+ if ((listToCheck == null) || (listToCheck.size() == 0)) {
+
+-            throw new IllegalArgumentException("A list of AuthenticationManagers is required");
+
++            throw new IllegalArgumentException("A list of AuthenticationProviders is required");         
+
+}   
+
+ }
+
+Reference Message:
+
+correct wrong error message in FILE
+
+Generated Message 1:
+
+change FILE setenabled to resource
+
+Generated Message 2:
+
+more helpful illegalargumentexception message
+
+Generated Message 3:
+
+well error message in FILE relativize
+
+Commit_id: 98f6111d06a305d64fa7c019ca438f4d740bede5
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -98,7 +98,7 @@ public class DelayedLiveReloadTriggerTests {     }      
+
+@Test
+
+-    public void urlMostNotBeNull() throws Exception {
+
++    public void urlMustNotBeNull() throws Exception {       
+
+ this.thrown.expect(IllegalArgumentException.class);       
+
+ this.thrown.expectMessage("URL must not be empty");       
+
+ new DelayedLiveReloadTrigger(this.liveReloadServer, this.requestFactory, null);
+
+Reference Message:
+
+fix typo
+
+Generated Message 1:
+
+fix indent in FILE
+
+Generated Message 2:
+
+split test so either can fail
+
+Generated Message 3:
+
+fix typo
+
+Commit_id: 0dc096f905e128565e2a0f37e81a0008bd3e46b6
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -701,7 +701,7 @@ public class HostConfig           
+
+ if (files[i].equalsIgnoreCase("WEB-INF"))               
+
+ continue;             
+
+File dir = new File(appBase, files[i]);
+
+-            if (files[i].toLowerCase().endsWith(".war")) {
+
++            if (files[i].toLowerCase().endsWith(".war") && dir.isFile()) {                                  
+
+// Calculate the context path and make sure it is unique                 
+
+String contextPath = "/" + files[i];
+
+Reference Message:
+
+fix http issue apache org bugzilla show bug cgi id NUMBER
+
+Generated Message 1:
+
+cache don t hold them for well performance
+
+Generated Message 2:
+
+fix http issue apache org bugzilla show bug cgi id NUMBER
+
+Generated Message 3:
+
+fix http issue apache org bugzilla show bug cgi id NUMBER
+
+Commit_id: 6a8b1bb49c31a2195c1394b446165011034999c2
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -242,7 +242,7 @@ public class NeoStore extends AbstractStore       
+
+ }         
+
+setRecord( 3, txId );       
+
+ // TODO Why check null here? because I have no time to fix the tests
+
+-        if ( isStarted && lastCommittedTxIdSetter != null && txId == getLastCommittedTx()+1 )
+
++        if ( isStarted && lastCommittedTxIdSetter != null )         
+
+{             lastCommittedTxIdSetter.setLastCommittedTxId( txId );       
+
+ }
+
+Reference Message:
+
+fix bug
+
+Generated Message 1:
+
+fix bug
+
+Generated Message 2:
+
+fix bug
+
+Generated Message 3:
+
+fix bug
+
+Commit_id: 5ae750f13ed8cf3ca0d8287b4809cd0824ab12e5
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -121,7 +121,7 @@ public class RestGetMappingAction extends BaseRestHandler {                    
+
+ builder.endObject(); 
+
+-                    channel.sendResponse(new XContentRestResponse(request, foundAny ? OK : NOT_FOUND, builder));
+
++                    channel.sendResponse(new XContentRestResponse(request, foundAny || indices.length == 0 ? OK : NOT_FOUND, builder));               
+
+ } catch (Exception e) {                     
+
+onFailure(e);                 
+
+}
+
+Reference Message:
+
+get mapping with no index specify on an empty cluster return NUMBER close NUMBER
+
+Generated Message 1:
+
+get setting or mapping type might not be the index but the index return NUMBER
+
+Generated Message 2:
+
+get setting on empty node fails with arrayindexoutofboundsexception NUMBER
+
+Generated Message 3:
+
+get setting or mapping for non exist index return NUMBER ok close NUMBER
+
+Commit_id: 7b2e1b7b4f88c1270c10d6062401efc40b37d362
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -160,7 +160,9 @@ public class NdkCxxPlatforms {                             
+
+? 14                             
+
+: ndkVersion.startsWith("15.")                                 
+
+? 15
+
+-                                : ndkVersion.startsWith("16.") ? 16 : -1;
+
++                                : ndkVersion.startsWith("16.")
+
++                                    ? 16
+
++                                    : ndkVersion.startsWith("17.") ? 17 : -1; 
+
+ }    public static String getDefaultGccVersionForNdk(String ndkVersion) {
+
+Reference Message:
+
+support ndk NUMBER
+
+Generated Message 1:
+
+fix htmlunit annotation
+
+Generated Message 2:
+
+support android ndk NUMBER
+
+Generated Message 3:
+
+support android ndk NUMBER
+
+Commit_id: bf9cce02390d104ab9ba85e0de0386ecb737dabf
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -1174,7 +1174,7 @@ public class MessageDatabase extends ServiceSupport implements BrokerServiceAwar                         
+
+break;                   
+
+ }               
+
+ }
+
+-                LOG.trace("gc candidates after first tx:" + firstTxLocation.getDataFileId() + ", " + gcCandidateSet);
+
++                LOG.trace("gc candidates after first tx:" + firstTxLocation + ", " + gcCandidateSet);           
+
+ }              // Go through all the destinations to see if any of them can remove GC candidates.
+
+Reference Message:
+
+http issue apache org jira browse amq NUMBER log file offset in addition to file location in checkpointupdate
+
+Generated Message 1:
+
+copy path in the reload processor
+
+Generated Message 2:
+
+polished
+
+Generated Message 3:
+
+http issue apache org jira browse amq NUMBER kahadb error could not locate data file
+
+Commit_id: aadd682d09535ff04b4939b21643efe0dfa499ca
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -234,8 +234,8 @@ public class Array2DHashSet implements Set {     }      
+
+@Override
+
+-    public Object[] toArray() {
+
+-        Object[] a = new Object[size()];
+
++    public T[] toArray() {
+
++        T[] a = createBucket(size());       
+
+ int i = 0;         
+
+for (T[] bucket : buckets) {             
+
+if ( bucket==null ) continue;
+
+Reference Message:
+
+FILE toarray return t
+
+Generated Message 1:
+
+add fail unit test and add list of all aggregate function
+
+Generated Message 2:
+
+call size once
+
+Generated Message 3:
+
+FILE toarray return atnconfig
+
+Commit_id: e259cea4261b90389d03602bdfb83f2a2da2e3bc
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -910,7 +910,7 @@ public class MetaClassImpl implements MetaClass, MutableMetaClass {             final Closure closure = (Closure) object;              
+
+final Object owner = closure.getOwner();
+
+-            if (CLOSURE_DO_CALL_METHOD.equals(methodName)) {
+
++            if (CLOSURE_DO_CALL_METHOD.equals(methodName) || CLOSURE_CALL_METHOD.equals(methodName)) {               
+
+ final Class objectClass = object.getClass();               
+
+ if (objectClass == MethodClosure.class) {                     
+
+final MethodClosure mc = (MethodClosure) object;
+
+Reference Message:
+
+groovy NUMBER correction ot the former fix something in grail gant need this
+
+Generated Message 1:
+
+opennlp NUMBER fix a bug bug in the same test case
+
+Generated Message 2:
+
+simplifies an if statement
+
+Generated Message 3:
+
+revert groovy NUMBER correction ot the former fix something in grail gant need this
+
+Commit_id: 8958a9b37445591c68cd0d3c01bda1974e4df0cc
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -31,7 +31,7 @@ public class UserPluginConfig {   
+
+private List includeList;      
+
+public UserPluginConfig(ProfilerConfig src) {
+
+-        includeList = split(src.readString("profiler.user.include", ""));
+
++        includeList = split(src.readString("profiler.entry-point", ""));     
+
+}      public List getIncludeList() {
+
+Reference Message:
+
+change config option name
+
+Generated Message 1:
+
+change config option name
+
+Generated Message 2:
+
+change config option name
+
+Generated Message 3:
+
+change config option name
+
+Commit_id: 14e66dda6e7ed20a159ec8dcd866b043f8348a31
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -46,7 +46,8 @@ public class SmapStratum {        
+
+ public void setInputStartLine(int inputStartLine) {           
+
+ if (inputStartLine < 0)
+
+-                throw new IllegalArgumentException(Localizer.getMessage("jsp.error.negativeParameter", inputStartLine));
+
++                throw new IllegalArgumentException(Localizer.getMessage(
+
++                        "jsp.error.negativeParameter", Integer.valueOf(inputStartLine)));           
+
+ this.inputStartLine = inputStartLine;         
+
+}
+
+Reference Message:
+
+fix an ide nag
+
+Generated Message 1:
+
+fix an ide nag
+
+Generated Message 2:
+
+fix an ide nag
+
+Generated Message 3:
+
+fix an ide nag
+
+Commit_id: cec24058a303a2d4ea8b7c07032161145a39718a
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -36,8 +36,8 @@ public class ServerHttpBasicAuthenticationConverter implements Function<ServerWe     
+
+public static final String BASIC = "Basic ";      
+
+@Override
+
+-    public Mono apply(ServerWebExchange serverWebExchange) {
+
+-        ServerHttpRequest request = serverWebExchange.getRequest();
+
++    public Mono apply(ServerWebExchange webExchange) {
+
++        ServerHttpRequest request = webExchange.getRequest();          
+
+String authorization = request.getHeaders().getFirst(HttpHeaders.AUTHORIZATION);         
+
+if(authorization == null) {
+
+Reference Message:
+
+serverwebexchange webexchange
+
+Generated Message 1:
+
+polish
+
+Generated Message 2:
+
+polish
+
+Generated Message 3:
+
+FILE default serverwebexchange
+
+Commit_id: 9cf0dc6b38f4b6f7390d73062c2356f9d9dca8b7
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -459,7 +459,7 @@ public class ODocument extends ORecordVirtualAbstract implements Iterabl      */     
+
+public RET field(final String iPropertyName, final OType iType) {       
+
+ setFieldType(iPropertyName, iType);
+
+-        return field(iPropertyName);
+
++        return (RET) field(iPropertyName);     
+
+}      /**
+
+Reference Message:
+
+fixe compilation issue with javac
+
+Generated Message 1:
+
+NUMBER in the thread
+
+Generated Message 2:
+
+strict type be add
+
+Generated Message 3:
+
+fix issue on compilation use ant
+
+Commit_id: cfd2d83cea56f882e6a7fbddef94c05786f34f33
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -356,8 +356,7 @@ public class JMeterTest extends JMeterTestCase {               
+
+ (title != null && title.length() > 0) // Will be "" for internal components                 
+
+&& (title.toUpperCase(java.util.Locale.ENGLISH).indexOf("(ALPHA") == -1)                  
+
+&& (title.toUpperCase(java.util.Locale.ENGLISH).indexOf("(BETA") == -1)
+
+-                && (!title.equals("Example1")) // Skip the example samplers ...
+
+-                && (!title.equals("Example2"))
+
++                && (!title.matches("Example\\d+")) // Skip the example samplers ...               
+
+ && (!name.startsWith("org.apache.jmeter.examples."))                 )
+
+             {// No, not a work in progress ...
+
+Reference Message:
+
+generic test for example
+
+Generated Message 1:
+
+fix the build issue of FILE
+
+Generated Message 2:
+
+remove bogus deprecation remove duplicate implementation
+
+Generated Message 3:
+
+skip certain test for the example
+
+Commit_id: 82aa1b1dc455244ec120fbc5801bd40c7abd056f
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -169,7 +169,7 @@ public class PostgreDatabaseManager extends SQLObjectEditor<PostgreDatabase, Pos             super.afterExecute(session, error);           
+
+ if (error == null) {                 try {
+
+-                    database.initializeMetaContext(session.getProgressMonitor());
+
++                    database.checkInstanceConnection(session.getProgressMonitor());                 
+
+} catch (DBException e) {                   
+
+ log.error("Can't connect to the new database");                 
+
+}
+
+Reference Message:
+
+NUMBER pg database create fix
+
+Generated Message 1:
+
+pg materialize message handler fix
+
+Generated Message 2:
+
+expose FILE session to subclass
+
+Generated Message 3:
+
+NUMBER pg read database fix
+
+Commit_id: 8ae3831600a16257936af1efd503d55a46ee50ff
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -112,7 +112,7 @@ public abstract class IteratorUtil         
+
+{             throw new NoSuchElementException( "More than one element in " +               
+
+ iterator + ". First element is '" + result +
+
+-                "' and the element value is '" + iterator.next() + "'" );
+
++                "' and the second element is '" + iterator.next() + "'" );         }   
+
+     return result;   
+
+ }
+
+Reference Message:
+
+correct an exception message
+
+Generated Message 1:
+
+correct an exception message
+
+Generated Message 2:
+
+correct an exception message
+
+Generated Message 3:
+
+correct an exception message
+
+Commit_id: 29863f32c9f916167f8e3af1858432a127adb989
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -478,7 +478,8 @@ public class Base64 extends BaseNCodec {                   
+
+ buffer[context.pos++] = (byte) ((context.ibitWorkArea) & MASK_8BITS);                   
+
+ break;                 
+
+default:
+
+-                    throw new IllegalStateException(sm.getString("base64.impossibleModulus", context.modulus));
+
++                    throw new IllegalStateException(sm.getString(
+
++                            "base64.impossibleModulus", Integer.valueOf(context.modulus)));             
+
+}         
+
+}     
+
+}
+
+Reference Message:
+
+fix an ide nag
+
+Generated Message 1:
+
+fix an ide nag
+
+Generated Message 2:
+
+fix an ide nag
+
+Generated Message 3:
+
+fix an ide nag
+
+Commit_id: b35599b86056b95240421ea2c47ad64b0e34aa53
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -183,7 +183,7 @@ public class JmsBinding {                 
+
+try {                   
+
+ map.put("JMSType", jmsMessage.getJMSType());                 
+
+} catch (JMSException e) {
+
+-                    LOG.trace("Cannot read JMSReplyTo header. Will ignore this exception.", e);
+
++                    LOG.trace("Cannot read JMSType header. Will ignore this exception.", e);               
+
+ }                  // this works around a bug in the ActiveMQ property handling
+
+Reference Message:
+
+oracleaq do not support jmstype header
+
+Generated Message 1:
+
+oracleaq do not work
+
+Generated Message 2:
+
+ensure stack trace be in trace log of exception
+
+Generated Message 3:
+
+oracleaq do not support jmstype header
+
+Commit_id: 47a7eabe91fc8e8d26518bd092e62cdc7570d9af
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -105,7 +105,7 @@ public class OggInputStream extends InputStream {   
+
+ public OggInputStream (InputStream input, OggInputStream previousStream) {       
+
+ if (previousStream == null) {             
+
+convbuffer = new byte[convsize];
+
+-            outBuffer = new byte[1024 * 20];
+
++            outBuffer = new byte[1024 * 50];       
+
+ } else {             
+
+convbuffer = previousStream.convbuffer;           
+
+ outBuffer = previousStream.outBuffer;
+
+Reference Message:
+
+large ogg buffer
+
+Generated Message 1:
+
+make ogg buffer large again
+
+Generated Message 2:
+
+make ogg buffer large again
+
+Generated Message 3:
+
+make ogg buffer large again
+
+Commit_id: 578dfe2a2cb54c06e930ca0f3caf1da4eb418be5
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -158,8 +158,8 @@ private static File locateFirefoxBinaryFromPlatform() {       
+
+ // Do nothing     } 
+
+-    return binary != null && binary.exists() ? binary : findBinary("firefox3", "firefox2",
+
+-        "firefox");
+
++    return binary != null && binary.exists() ? binary : findBinary("firefox", "firefox3",
+
++        "firefox2");   }  
+
+ private static File findExistingBinary(final ImmutableList paths) 
+
+Reference Message:
+
+danielwagnerhall search for firefox before version specific firefoxes fix issue NUMBER
+
+Generated Message 1:
+
+bug NUMBER least check in FILE
+
+Generated Message 2:
+
+simonstewart sometimes the system doesn t have firefox instal cope with that by not throw an exception
+
+Generated Message 3:
+
+danielwagnerhall stringify file before add it a a capability fix issue NUMBER
+
+Commit_id: 951fb6efc0414dcf71cf6b147f95f9923a7c5c8d
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -358,7 +358,7 @@ StateListener {                   
+
+ }               
+
+ }             
+
+}
+
+-            s_logger.debug("Cannnot deploy to specified host, returning.");
+
++            s_logger.debug("Cannot deploy to specified host, returning.");             
+
+return null;         
+
+}
+
+Reference Message:
+
+typo correction
+
+Generated Message 1:
+
+typo correction
+
+Generated Message 2:
+
+typo correction
+
+Generated Message 3:
+
+typo correction
+
+Commit_id: e4dbeb780236b87d76a9bf76873d3b899198e57f
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
+
+Raw Diff:
+
+@@ -264,7 +264,7 @@ public class PooledConnection {       
+
+ if (pwd != null) properties.setProperty(PROP_PASSWORD, pwd);          try {
+
+-            connection = connection = driver.connect(driverURL, properties);
+
++            connection = driver.connect(driverURL, properties);         
+
+} catch (Exception x) {             
+
+if (log.isDebugEnabled()) {               
+
+ log.debug("Unable to connect to database.", x);
+
+Reference Message:
+
+fix http issue apache org bugzilla show bug cgi id NUMBER
+
+Generated Message 1:
+
+fix http issue apache org bugzilla show bug cgi id NUMBER
+
+Generated Message 2:
+
+grid let s try to enable keep alive in FILE and watch what will happen
+
+Generated Message 3:
+
+fix http issue apache org bugzilla show bug cgi id NUMBER
+
+Commit_id: 8c41e9ca281a9ca49a4dd2d2c05419417fb46d86
+
+========
+Score of Generated Message 1:
+Score of Generated Message 2:
+Score of Generated Message 3:
