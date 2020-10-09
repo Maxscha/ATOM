@@ -15,6 +15,7 @@ Requirements:
 * scikit-learn 0.20.2
 * Numpy 1.14.5
 * Pickle 0.7.5
+* torchtext 0.6.0
 
 ## Pre-Processing Stage
 
