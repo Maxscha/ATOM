@@ -1,7 +1,7 @@
 # ATOM
 ATOM: Commit Message Generation Based onAbstract Syntax Tree and Hybrid Ranking
 
-A repository with the code for [the paper](https://arxiv.org/pdf/1912.02972.pdf). It consists the code for preprocessing and training the commit message generation model. The data is also available at [dataset](https://drive.google.com/drive/folders/1Qw06U462e1nFUXEzXsclziMBpFrulykM).
+A repository with the code for [the paper](https://arxiv.org/pdf/1912.02972.pdf). It consists the code for preprocessing and training the commit message generation model. The data is also available at [dataset](https://zenodo.org/record/4066398#.X32LSZMzZTZ).
 
 Requirements:
 * Python 3.6
