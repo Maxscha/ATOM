@@ -52,18 +52,16 @@ Based on the dataset, we can train our AST2seq model by running the shell train.
 We provides different variants of hybird ranking models e.g., CNN, LSTM, GRU or attention. To train the hybird ranking model, 
 you need to run trainer.py file in the dir commit2seq/ranking/trainer.py and save the model to ranking_models directory.
 
-We also provide the implementation of [Commit2Vec: Learning Distributed Representations of Code Changes](https://arxiv.org/abs/1911.07605) in the commt2vec directionary. The difference between commit2vec and ast2seq is the part of encoding part. In ast2seq, we use Bi-lSTM to encode ast paths, however, commit2seq chose to use fully-collected layer for path representation.
-
-
 ## Citation
 If you find this code or our paper relevant to your work, please cite our arXiv paper:
 
 ```
-@article{liu2019atom,
+@article{liu2020atom,
   title={ATOM: Commit Message Generation Based on Abstract Syntax Tree and Hybrid Ranking},
-  author={Liu, Shangqing and Gao, Cuiyun and Chen, Sen and Nie, Lun Yiu and Liu, Yang},
-  journal={arXiv preprint arXiv:1912.02972},
-  year={2019}
+  author={Liu, Shangqing and Gao, Cuiyun and Chen, Sen and Yiu, Nie Lun and Liu, Yang},
+  journal={IEEE Transactions on Software Engineering},
+  year={2020},
+  publisher={IEEE}
 }
 ```
 
