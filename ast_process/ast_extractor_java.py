@@ -12,23 +12,28 @@ from nltk.corpus import wordnet
 import nltk
 from nltk.stem import WordNetLemmatizer
 
+
 project_root = os.path.dirname(os.path.dirname(__file__))
-SAVE_DIR = os.path.join(project_root, 'ast_process/data/java_relevant_data/raw_commits_from_github/')
-FUNCTIONS_GENERATE_PATH = os.path.join(project_root, 'ast_process/data/java_relevant_data/functions_extracted_commits')
-EXTRACTOR_CUSTOMIZED_JAR = os.path.join(project_root, 'JavaExtractor/JPredict/target/JavaExtractor-Customized.jar')
-SAVE_AST_DIR = os.path.join(project_root, 'ast_process/data/java_relevant_data/ast_commits')
-USED_DIFF_SAVED_PATH = os.path.join(project_root, 'ast_process/data/java_relevant_data/diffs_used_commits')
-TOKENS_EXTRACTED_DIFFS = os.path.join(project_root, 'ast_process/data/java_relevant_data/tokens_extracted_diffs')
+
+# Input
+SAVE_DIR = os.path.join(project_root, 'ast_process/data/raw_commits_from_github/')
+FUNCTIONS_GENERATE_PATH = os.path.join(project_root, 'ast_process/data/functions_extracted_commits')
+EXTRACTOR_CUSTOMIZED_JAR = os.path.join(project_root, 'ast_process/JavaExtractor-0.0.1-SNAPSHOT.jar')
+
+# Output
+SAVE_AST_DIR = os.path.join(project_root, 'ast_process/data/ast_commits')
+USED_DIFF_SAVED_PATH = os.path.join(project_root, 'ast_process/data/diffs_used_commits')
+TOKENS_EXTRACTED_DIFFS = os.path.join(project_root, 'ast_process/data/tokens_extracted_diffs')
+
 LETEX_FILTER_KEYWORDS = ['Token.Text', 'Token.Comment','Token.Operator']
 PUNCTUATION_LIST = ['{}','?','',' ','.','/','!','(',')','[',']','?',',',';',':',"'",'"','-','{','}','...','‒','<<','>>','','\n']
 FUNCTION_NAME_COMMIT_DICT = os.path.join(project_root, 'ast_process/function_name_commits.json')
-
 
 def filter_functions(args):
     filter_project_commits = {}
     multi = args.multi
     total_count = 0
-    if multi:
+    if multi:        
         projects = os.listdir(FUNCTIONS_GENERATE_PATH)
     else:
         projects = args.project
@@ -150,6 +155,7 @@ def single_process(commit_file_obj_list, project, commit_file_name):
 
 
 def read_csv_in_project(project):
+    print(project)
     project_path = os.path.join(SAVE_DIR, project + '_commits.csv')
     project_csv_data = pd.read_csv(project_path)
     return project_csv_data
@@ -372,6 +378,7 @@ if __name__ == '__main__':
                         action="store_true")
     parser.add_argument('-l', '--max_path_length', help='clip AST by length', default=8)
     parser.add_argument('-w', '--max_path_width', help='clip AST by width', default=2)
+    parser.add_argument('-d', '--data_path', default="./data")
     args = parser.parse_args()
     filter_functions(args)
     # test()

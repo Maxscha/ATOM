@@ -9,10 +9,10 @@ import sys
 import os
 import json
 project_root = os.path.dirname(os.path.dirname(__file__))
-CONSTANT_REPO_PATH = '/home/shangqing/Downloads/project/java-project'
-RAW_DATA_PATH = os.path.join(project_root, 'ast_process/data/java_relevant_data/raw_commits_from_github')
-FUNCTIONS_GENERATE_PATH = os.path.join(project_root, 'ast_process/data/java_relevant_data/functions_extracted_commits')
-USED_DIFF_SAVED_PATH = os.path.join(project_root, 'ast_process/data/java_relevant_data/diffs_used_commits')
+CONSTANT_REPO_PATH = 'ast_process/data/repos/'
+RAW_DATA_PATH = os.path.join(project_root, 'ast_process/data/raw_commits_from_github')
+FUNCTIONS_GENERATE_PATH = os.path.join(project_root, 'ast_process/data/functions_extracted_commits')
+USED_DIFF_SAVED_PATH = os.path.join(project_root, 'ast_process/data/diffs_used_commits')
 FILTER_DIFFS_NUM = 10
 FILTER_CHUNKS_NUM = 5
 
@@ -52,6 +52,7 @@ def generate_functions(args):
     is_server = args.server
     if multiprocess:
         if not is_server:
+            print("not is server")
             project_commits = get_commits(projects, from_dir=True)
         else:
             projects = []
@@ -71,7 +72,10 @@ def generate_functions(args):
             process.join()
     else:
         single_project = projects[0]
+        
         project_commits = get_commits(single_project, from_dir=False)
+        print("single_process")
+        print(single_project)
         single_process(project_commits[single_project], single_project)
 
 
@@ -96,6 +100,7 @@ def single_process(commit_objs, project):
                 positive_functions, positive_matched_diffs, positive_dismatched_diffs = [], [], []
                 negative_functions, negative_matched_diffs, negative_dismatched_diffs = [], [], []
                 chunk_obj_list = process_single_diff(commit_id, commit.diff)
+                print(f'Len Chunk obj list{len(chunk_obj_list)}')
                 if len(chunk_obj_list) == 0:
                     continue
                 for chunk_obj in chunk_obj_list:
@@ -206,6 +211,7 @@ def get_function_from_commit(commit, function_directory, project_path, contexts,
 def get_commit_file_path(commit_id, file_path, repo_path, project):
     file_path = '.' + file_path
     cmd = ['git', 'show', commit_id + ':' + file_path]
+    print(cmd)
     last_name = file_path.split(os.sep)[-1]
     stdout = './' + project + '_stdout.txt'
     stderr = './' + project + '_stderr.txt'

@@ -66,3 +66,13 @@ If you find this code or our paper relevant to your work, please cite our arXiv 
 ```
 
 
+
+
+# Addition from Max
+Run
+
+`./build.sh` to build dockerfile
+
+`./console.sh` to start console within docker container
+
+`./prepare_data.sh` to get to the failing point

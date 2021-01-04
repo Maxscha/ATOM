@@ -24,3 +24,4 @@ def execute_command(command_list, cwd, stdout_path='stdout.txt', stderr_path='st
             p1.communicate()
         finally:
             my_timer.cancel()
+        print(p1.returncode)
